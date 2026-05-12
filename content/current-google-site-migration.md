@@ -75,3 +75,20 @@ Source: https://www.curious96.com as reviewed on 2026-05-12.
 - Research: Google Scholar
 - Job/professional: LinkedIn
 - Group website: HoodLab, hoodlabpurdue.com
+
+## Verified public links added in the GitHub rebuild
+
+Checked on 2026-05-12.
+
+- Google Scholar: https://scholar.google.com/citations?hl=en&user=sFSr0coAAAAJ
+- LinkedIn: https://www.linkedin.com/in/saumitra-phatak
+- Hood Lab: https://hoodlabpurdue.com
+- AMO Toolkit: https://amotoolkit.com
+- Poetry Instagram: https://www.instagram.com/curious_poem/
+- Public email: phataks@purdue.edu
+
+## Local file selected for public CV
+
+- Source file copied from: /Users/curious/Downloads/Career/CV_2025 (1).pdf
+- Site asset path: assets/Saumitra_Phatak_CV.pdf
+- Reason: newest CV-looking file in the local Career folder at the time of migration. Immigration, offer-letter, and application-document folders were not used.
