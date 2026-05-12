@@ -219,3 +219,111 @@ h3 { margin: 0 0 .65rem; font-size: 1.08rem; }
 
 /* Contact grid — 3-col on wider screens */
 @media (min-width: 860px) { .contact-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* ─── ELEVATION PASS ──────────────────────────────────────────────── */
+
+/* 1 · Hero headline gradient — text reads white fading to teal */
+.hero-copy h1 {
+  background: linear-gradient(148deg, #f0faf8 15%, #7de2d1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 2 · Hero card: top-edge shimmer — simulates a glass surface catching light */
+.hero-card {
+  position: relative;
+  overflow: hidden;
+}
+.hero-card::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 5%, rgba(125,226,209,.65) 50%, transparent 95%);
+  pointer-events: none;
+}
+
+/* 3 · Interactive cards: accent ring + depth glow on hover */
+.project-card:hover,
+.info-card:hover,
+.contact-card:hover {
+  box-shadow: 0 0 0 1px rgba(125,226,209,.38),
+              0 22px 60px rgba(0,0,0,.45),
+              0 0 32px rgba(125,226,209,.07) !important;
+}
+
+/* 4 · Timeline: left accent + horizontal slide on hover */
+.timeline-item {
+  border-left: 2px solid rgba(125,226,209,.22) !important;
+  transition: border-left-color .2s, transform .2s, background .2s !important;
+}
+.timeline-item:hover {
+  border-left-color: rgba(125,226,209,.7) !important;
+  transform: translateX(4px) !important;
+  background: rgba(125,226,209,.04) !important;
+}
+
+/* 5 · Publication card: teal left accent for editorial weight */
+.pub-card {
+  border-left-width: 2px !important;
+  border-left-color: rgba(125,226,209,.55) !important;
+  padding-left: 1.5rem;
+  transition: border-left-color .2s, box-shadow .2s;
+}
+.pub-card:hover { border-left-color: var(--accent) !important; }
+
+/* 6 · Section head: thin separator anchors the title */
+.section-head {
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  margin-bottom: 2rem;
+}
+
+/* 7 · Split-panel: top accent stripe */
+.split-panel {
+  border-top: 2px solid rgba(125,226,209,.3);
+}
+
+/* 8 · Footer: gradient rule instead of solid line */
+.site-footer {
+  border-top: none;
+  position: relative;
+}
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(125,226,209,.45) 35%,
+    rgba(255,200,87,.3) 65%,
+    transparent);
+}
+
+/* 9 · Staggered fade-in for card-grid children when parent reveals */
+.reveal .card-grid > *,
+.reveal .pf-grid > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .5s, transform .5s;
+}
+.reveal.visible .card-grid > *,
+.reveal.visible .pf-grid > * { opacity: 1; transform: none; }
+.reveal.visible .card-grid > *:nth-child(1),
+.reveal.visible .pf-grid > *:nth-child(1) { transition-delay: 0s; }
+.reveal.visible .card-grid > *:nth-child(2),
+.reveal.visible .pf-grid > *:nth-child(2) { transition-delay: .08s; }
+.reveal.visible .card-grid > *:nth-child(3),
+.reveal.visible .pf-grid > *:nth-child(3) { transition-delay: .16s; }
+.reveal.visible .card-grid > *:nth-child(4),
+.reveal.visible .pf-grid > *:nth-child(4) { transition-delay: .24s; }
+.reveal.visible .card-grid > *:nth-child(5),
+.reveal.visible .pf-grid > *:nth-child(5) { transition-delay: .32s; }
+
+/* 10 · Now-strip: subtle ambient glow */
+.now-strip { box-shadow: 0 0 24px rgba(125,226,209,.07); }
+
+/* 11 · Page-hero bottom rule — visual anchor before content */
+.page-hero { border-bottom: 1px solid rgba(255,255,255,.05); margin-bottom: .5rem; }
