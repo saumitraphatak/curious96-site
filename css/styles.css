@@ -69,6 +69,7 @@ h3 { margin: 0 0 .65rem; font-size: 1.08rem; }
   box-shadow: var(--shadow);
 }
 .hero-card { padding: clamp(1.25rem, 2.4vw, 1.7rem); overflow: hidden; }
+.hero-card h2 { font-size: clamp(1.55rem, 2.5vw, 2.15rem); max-width: 13ch; margin-bottom: 1.1rem; }
 .orbit { height: 145px; position: relative; display: grid; place-items: center; margin-bottom: .75rem; }
 .orbit::before { content: ""; width: 64px; height: 64px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 70px rgba(125,226,209,.45); }
 .orbit span { position: absolute; border: 1px solid rgba(255,255,255,.28); border-radius: 50%; animation: spin 14s linear infinite; }
@@ -77,6 +78,39 @@ h3 { margin: 0 0 .65rem; font-size: 1.08rem; }
 .orbit span:nth-child(3) { width: 108px; height: 108px; opacity: .45; animation-duration: 22s; }
 @keyframes spin { to { rotate: 360deg; } }
 .clean-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .9rem; color: var(--muted); }
+.coordinate-list { display: grid; gap: .65rem; }
+.coordinate-item {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: .15rem .75rem;
+  padding: .82rem;
+  border: 1px solid rgba(125,226,209,.18);
+  border-radius: 18px;
+  color: var(--text);
+  text-decoration: none;
+  background: rgba(255,255,255,.035);
+  transition: transform .16s, border-color .16s, background .16s;
+}
+.coordinate-item:hover { transform: translateY(-2px); border-color: rgba(125,226,209,.55); background: rgba(125,226,209,.09); }
+.coordinate-item span {
+  grid-row: span 2;
+  color: var(--accent-2);
+  font-size: .76rem;
+  font-weight: 950;
+  letter-spacing: .08em;
+}
+.coordinate-item strong { line-height: 1.1; }
+.coordinate-item em { color: var(--muted); font-style: normal; font-size: .88rem; line-height: 1.35; }
+.coordinate-item::after {
+  content: "Open →";
+  grid-column: 2;
+  width: fit-content;
+  margin-top: .15rem;
+  color: var(--accent);
+  border-bottom: 1px solid rgba(125,226,209,.6);
+  font-size: .78rem;
+  font-weight: 900;
+}
 .section-head { display: flex; justify-content: space-between; gap: 2rem; align-items: end; margin-bottom: 1.8rem; }
 .section-head h2 { max-width: 780px; }
 .card-grid { display: grid; gap: 1rem; }
