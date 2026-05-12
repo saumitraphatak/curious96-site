@@ -327,3 +327,43 @@ h3 { margin: 0 0 .65rem; font-size: 1.08rem; }
 
 /* 11 · Page-hero bottom rule — visual anchor before content */
 .page-hero { border-bottom: 1px solid rgba(255,255,255,.05); margin-bottom: .5rem; }
+
+/* ─── PROFILE PHOTO ──────────────────────────────────────────────── */
+.hero-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.profile-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 2px solid rgba(125,226,209,.5);
+  box-shadow: 0 0 0 4px rgba(125,226,209,.1), 0 8px 24px rgba(0,0,0,.35);
+  flex-shrink: 0;
+}
+.profile-meta { display: flex; flex-direction: column; gap: .2rem; }
+.profile-meta strong { font-size: .95rem; color: var(--text); line-height: 1.2; }
+.profile-meta span { font-size: .8rem; color: var(--muted); }
+
+/* Contact page: large photo alongside hero text */
+.contact-hero-profile { display: flex; align-items: flex-start; gap: 2.5rem; }
+.contact-profile-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: var(--radius);
+  object-fit: cover;
+  object-position: center top;
+  border: 1px solid rgba(125,226,209,.3);
+  box-shadow: 0 0 0 6px rgba(125,226,209,.07), var(--shadow);
+  flex-shrink: 0;
+}
+@media (max-width: 600px) {
+  .contact-hero-profile { flex-direction: column; align-items: center; text-align: center; }
+  .contact-profile-photo { width: 120px; height: 120px; }
+}
