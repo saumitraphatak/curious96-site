@@ -1,6 +1,6 @@
 # curious96-site
 
-A from-scratch static rebuild of `www.curious96.com` for Saumitra Phatak.
+This repository is the source for [**curious96.com**](https://www.curious96.com), the personal academic portfolio of Saumitra Phatak, a Physics Ph.D. candidate in Jonathan Hood's lab at Purdue University working on optical tweezers, single lithium/cesium atoms, laser cooling, and LiCs molecule assembly. It is a pure static HTML/CSS/JS site (no framework, no build step) with pages for research, publications, teaching, CV, side projects, and teaser links out to his essays and poetry, which are hosted on separate sibling sites. It began as a from-scratch rebuild that replaced an older Google Sites page and is now deployed live via GitHub Pages.
 
 ## Purpose
 
@@ -29,21 +29,16 @@ then visit:
 http://localhost:8000
 ```
 
-## Deployment plan
+No package manager, build step, or dependencies are required — every page is plain HTML/CSS/JS.
 
-When ready to replace the current Google Sites page:
+## Deployment
 
-1. Push this repository to GitHub.
-2. Enable GitHub Pages from the `main` branch and root folder.
-3. Add `www.curious96.com` as the custom domain.
-4. Update DNS where `curious96.com` is managed.
-5. Enforce HTTPS after the certificate is provisioned.
+The site is deployed via **GitHub Pages** from the `main` branch, root folder, with the
+custom domain `www.curious96.com` configured through the `CNAME` file at the repo root.
+Pushing to `main` updates the live site.
 
-Do not switch DNS until the content is reviewed.
+## Editing content
 
-## Files to add manually
-
-- `assets/Saumitra_Phatak_CV.pdf` for the CV download button.
-- Optional images: portrait, lab photos, tweezer/cooling figures, talk thumbnails.
-- Full essay text migrated from old PDF blog files.
-- Full poem archive if desired.
+For conventions on adding a new publication, essay/poem teaser, or CV update, see
+[`CLAUDE.md`](./CLAUDE.md) — it documents the full directory structure and the exact
+steps to follow so new content matches the existing site.
