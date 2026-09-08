@@ -29,3 +29,28 @@ document.querySelectorAll('.filter-btn[data-lang]').forEach(btn => {
     });
   });
 });
+
+// Writing topic filter
+document.querySelectorAll('.filter-btn[data-topic]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn[data-topic]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const topic = btn.dataset.topic;
+    document.querySelectorAll('.writing-card[data-topic]').forEach(card => {
+      card.style.display = (!topic || card.dataset.topic === topic) ? '' : 'none';
+    });
+  });
+});
+
+// BibTeX copy-to-clipboard buttons
+document.querySelectorAll('.bibtex-copy').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const pre = document.getElementById(btn.dataset.target);
+    if (!pre || !navigator.clipboard) return;
+    navigator.clipboard.writeText(pre.textContent.trim()).then(() => {
+      const original = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = original; }, 1500);
+    });
+  });
+});

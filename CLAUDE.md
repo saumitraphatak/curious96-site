@@ -39,7 +39,8 @@ curious96-site/
 ├── robots.txt                # allow-all + sitemap pointer
 ├── sitemap.xml                # manual sitemap; UPDATE when pages are added/removed
 ├── favicon.svg
-├── index.html                 # Home page: hero, research highlights, "beyond the lab" grid
+├── index.html                 # Home page: hero, stat strip, "Recent milestones" news list,
+│                                 # research highlights, "beyond the lab" grid
 ├── research.html              # Research narrative: lithium / theory / cesium / LiCs timeline
 ├── publications.html          # Paper cards (DOI + arXiv links) — see "Adding a publication" below
 ├── teaching.html               # TA work, AMO mini-course, mentorship, recorded talks
@@ -144,12 +145,33 @@ Publications are hand-written `<article class="pub-card">` blocks inside the sin
     <a href="DOI_URL" target="_blank" rel="noopener">DOI</a>
     <a href="ARXIV_URL" target="_blank" rel="noopener">arXiv</a>
   </div>
+  <details class="bibtex-details">
+    <summary>BibTeX</summary>
+    <pre class="bibtex-block" id="bibtex-UNIQUE-ID">@article{citekey,
+  author  = {...},
+  title   = {...},
+  journal = {...},
+  volume  = {...},
+  number  = {...},
+  pages   = {...},
+  year    = {...},
+  doi     = {...}
+}</pre>
+    <button class="bibtex-copy" type="button" data-target="bibtex-UNIQUE-ID">Copy BibTeX</button>
+  </details>
 </article>
 ```
 
+Every `pub-card` carries a `<details class="bibtex-details">` block (added Sept 2026):
+give it a unique `id` on the `<pre>` (matched by the button's `data-target`), and only
+include fields you can verify from the DOI/journal page — never guess a volume, issue,
+or page/article number. `js/main.js`'s `.bibtex-copy` handler copies the `<pre>` text to
+the clipboard on click.
+
 Also consider: updating `research.html` if the paper represents a new research
-milestone, updating `cv.html`'s "Selected achievements" timeline, and bumping the
-publications count/summary text on `index.html` if referenced.
+milestone, updating `cv.html`'s "Selected achievements" timeline, adding a line to the
+"Recent milestones" `.news-list` on `index.html`, and bumping the publications count/
+summary text on `index.html` / the `.stat-strip` if referenced.
 
 ### Add a new blog/essay entry (`writing.html`)
 
@@ -158,12 +180,19 @@ Full essay text is **not** hosted in this repo — it lives at
 list. To add a new essay to the teaser:
 
 1. Publish the full essay in the `curious-writings` repo first.
-2. Add a new `<a class="writing-card" href="...articles/NN-slug.html" target="_blank" rel="noopener">`
-   block to `writing.html`, following the numbered filename convention already in use
-   (`01-...html`, `02-...html`, etc.), with a short title/teaser `<p>` and a
-   `<span class="lang-pill">` (`essay`, `Marathi`, `science`, `travel`, etc.).
-3. Update the essay count mentioned in the `writing.html` lead paragraph and on
-   `index.html` / `projects.html` if they cite a specific number.
+2. Add a new `<a class="writing-card" data-topic="TOPIC" href="...articles/NN-slug.html"
+   target="_blank" rel="noopener">` block to `writing.html`, following the numbered
+   filename convention already in use (`01-...html`, `02-...html`, etc.), with a short
+   title/teaser `<p>` and a `<span class="lang-pill">` (`essay`, `Marathi`, `science`,
+   `travel`, etc.). It must sit inside the `<div class="writing-list">` wrapper, not
+   directly in the outer `<section>`.
+3. `TOPIC` must be one of the six values the `.filter-row` buttons above the list
+   already use: `journey`, `travel`, `philosophy`, `personal-growth`, `science`,
+   `marathi` (added Sept 2026, mirrors the language filter on `poetry.html`). If an
+   essay is written primarily in Marathi/Hindi, also add `lang="mr"`/`lang="hi"` to its
+   `writing-card` for screen readers.
+4. Update the essay count mentioned in the `writing.html` lead paragraph and on
+   `index.html` / `projects.html` / the `.stat-strip` if they cite a specific number.
 
 ### Add/update poems (`poetry.html`)
 
