@@ -84,16 +84,29 @@ a full CMS here — new full essays/poems belong in those other repos.
 
 ## Key conventions
 
-- **Every page repeats the same `<head>` boilerplate**: gtag snippet, charset/viewport
-  meta, `<title>`, meta description, `rel="canonical"` (absolute URL under
-  `https://www.curious96.com/...`), Open Graph tags (on `index.html`), favicon link,
-  Google Fonts preconnect + stylesheet link, and `css/styles.css`. When adding a new
-  page, copy this block from an existing page rather than writing it from scratch, and
-  update the `<title>`, meta description, and canonical URL.
+- **Every page repeats the same `<head>` boilerplate**: charset/viewport meta (first,
+  before the gtag snippet, per HTML best practice), gtag snippet, `<title>`, meta
+  description, `rel="canonical"` (absolute URL under `https://www.curious96.com/...`),
+  a full Open Graph + Twitter Card block (title/description/type/url/image — **every
+  page**, not just `index.html`; image is `assets/saumitra.jpg` via its absolute URL),
+  favicon link, Google Fonts preconnect + stylesheet link (only pull in the Noto Serif
+  Devanagari family on `poetry.html` — no other page renders Devanagari text), and
+  `css/styles.css`. `index.html` additionally carries a Person JSON-LD block. When
+  adding a new page, copy this block from an existing page rather than writing it from
+  scratch, and update the `<title>`, meta description, canonical URL, and OG/Twitter
+  title+description+url.
 - **Every page repeats the same header/nav markup** (`.site-header` > `.brand` +
   `.nav-toggle` + `.site-nav` with links to research/publications/teaching/projects/
   writing/cv/contact). If you add or remove a nav item, update it **in every HTML file**
-  — there is no shared include/templating system.
+  — there is no shared include/templating system. The nav carries accessibility
+  attributes that must be copied along with it: `.site-nav` has `id="site-nav"
+  aria-label="Main navigation"`, and `.nav-toggle` has `aria-label="Toggle navigation"
+  aria-expanded="false" aria-controls="site-nav"` (`js/main.js` flips `aria-expanded`
+  when the mobile menu opens/closes — don't hand-toggle the class without it). Every
+  page also opens `<body>` with `<a class="skip-link" href="#main">Skip to content</a>`
+  and gives `<main>` an `id="main"` for that link to target.
+- A custom `404.html` (same head/header/footer pattern, `noindex` meta, no sitemap
+  entry) is served by GitHub Pages for any unmatched route.
 - **Every page ends with the same footer pattern**: `<footer class="site-footer">` with
   a `©` + `<span data-year>` (auto-filled by `js/main.js`) and a few contextual links.
 - `js/main.js` is shared across all pages and handles:

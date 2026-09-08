@@ -1,6 +1,11 @@
 const nav = document.querySelector('.site-nav');
 const toggle = document.querySelector('.nav-toggle');
-if (toggle && nav) toggle.addEventListener('click', () => nav.classList.toggle('open'));
+if (toggle && nav) {
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+}
 document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
 const current = location.pathname.split('/').pop() || 'index.html';
 document.querySelectorAll('.site-nav a').forEach(a => {
