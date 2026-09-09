@@ -1,6 +1,6 @@
 # curious96-site
 
-This repository is the source for [**curious96.com**](https://www.curious96.com), the personal academic portfolio of Saumitra Phatak, a Physics Ph.D. candidate in Jonathan Hood's lab at Purdue University working on optical tweezers, single lithium/cesium atoms, laser cooling, and LiCs molecule assembly. It is a pure static HTML/CSS/JS site (no framework, no build step) with pages for research, publications, teaching, CV, side projects, and teaser links out to his essays and poetry, which are hosted on separate sibling sites. It began as a from-scratch rebuild that replaced an older Google Sites page and is now deployed live via GitHub Pages.
+This repository is the source for [**curious96.com**](https://www.curious96.com), the personal academic portfolio of Saumitra Phatak, who recently completed his Physics Ph.D. in Jonathan Hood's lab at Purdue University working on optical tweezers, single lithium/cesium atoms, laser cooling, and LiCs molecule assembly. It is a pure static HTML/CSS/JS site (no framework, no build step) with pages for research, publications, teaching, CV, side projects, and teaser links out to his essays and poetry, which are hosted on separate sibling sites. It began as a from-scratch rebuild that replaced an older Google Sites page and is now deployed live via GitHub Pages.
 
 ## Purpose
 

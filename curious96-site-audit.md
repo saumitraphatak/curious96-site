@@ -84,3 +84,27 @@ Spot-checked rather than exhaustively crawled (9 pages, ~20 outbound links):
 | Worth a look | Manually confirm the Purdue Hammer thesis link still opens (automated check got a 403, likely bot-blocked) | `publications.html`, `cv.html` |
 
 Nothing here is structural — the site is clean, fast, well-documented for future editing, and has genuinely strong contrast/focus-state accessibility fundamentals. Everything above falls out of the same root cause: 9 hand-duplicated HTML files with no shared template, so a change made on one page doesn't always make it to the other 8.
+
+---
+
+## Maintenance Log
+
+### 2026-09-08
+
+Orientation: `git status` was clean at session start; working tree in sync, no local uncommitted work to avoid. (Note: a stale, empty `.git/index.lock` was left behind by a read-only `git status` call in this automated session and could not be removed — this sandbox's shell cannot delete files. If a future `git add`/`git commit` fails with "Unable to create '.git/index.lock': File exists," delete that one file manually and retry.)
+
+Checked the "Highest-value fixes" from the September 2026 audit above — all four were already applied (as of commit `0a3cd78`, dated 2026-09-07): `projects.html` is in `sitemap.xml`; `aria-label`/`aria-expanded`/`id="main"`/skip-link are present on all 9 pages; the `research.html` footer AMO Toolkit link has `target="_blank" rel="noopener"`; and Open Graph/Twitter Card tags (including `og:image`) are on every page. Most of the "Low priority" items were also already done (poem `lang="hi"`/`lang="mr"` attributes, `width`/`height` on both `<img>` tags, custom `404.html`, unused Devanagari font trimmed to `poetry.html` only). The Ph.D.-candidate → Ph.D.-complete correction on `cv.html`/`index.html` was also already made (commit `a417463`).
+
+Fresh pass this session:
+- **Internal links & anchors:** every relative `.html` href across all 10 pages resolves to a real file; every in-page `#anchor` href resolves to a matching `id`. No breakage found.
+- **External links spot-checked:** all 12 `curious-writings` essay links, `siyahi-poetry`, `realworld-academy`, `hoodlabpurdue.com`, `amotoolkit.com`, and the PRA DOI (`10.1103/vr4g-h995`, resolves correctly to the Blodgett/Phatak et al. paper) all load successfully. Google Scholar and LinkedIn can't be checked by automated fetch (blocked by their own `robots.txt`) — not evidence of breakage, just untestable this way. The Purdue Hammer thesis link still 403s to automated fetch, same as the September audit found — still reads as bot-blocking rather than a real break, but still worth a manual click since it's your own dissertation link.
+- **Stale-content fix:** the poem count was out of date in 6 places — `poetry.html` (×3), `projects.html`, and `CLAUDE.md` still said "104 poems," but the live Siyahi site now states 108. Updated all 6 to 108. (`index.html` already said 108 — only it had been kept in sync.)
+- **Stale-doc fix:** `CLAUDE.md` and `README.md` still described you as "a Physics Ph.D. candidate" even though `cv.html`/`index.html` were already updated to reflect the completed Ph.D. Reworded both to "who recently completed his Physics Ph.D." for consistency. (These are internal repo docs, not published site content.)
+- Cross-checked the homepage stat strip against source pages: publications (4), essays (12), and open-source projects (4) all match actual counts. Left the "14 AMO Toolkit calculators" stat alone — verifying it would mean auditing the sibling `amotoolkit.com` site, which is out of scope here (and has its own maintenance task).
+
+**Not touched / flagged for you, not fixed:**
+- No mention anywhere on the site of your current role (Quantum Engineer at Atom Computing, Boulder, CO) — the bio just says you "recently completed" your Ph.D., with no post-Ph.D. role or location. Didn't add this myself since it's a content/voice decision (hero copy, CV, "now" strip) rather than a mechanical fix — let me know if you'd like it added and where.
+- Homepage meta description (`index.html`) is 182 characters, above the ~155–160 Google typically displays — grew slightly with the Ph.D.-completion edit. Minor; flagging rather than trimming your wording myself.
+- Structured data (`Person`/`ScholarlyArticle` JSON-LD beyond the existing homepage block) and the Purdue Hammer link manual check remain open from the original audit, still low priority.
+
+No commits made (read-only git use, per policy). All edits above are plain-text/number corrections; no markup structure was touched.

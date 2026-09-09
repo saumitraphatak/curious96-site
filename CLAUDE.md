@@ -5,7 +5,7 @@ Guidance for Claude Code (or any future editor, human or AI) working in this rep
 ## What this project is
 
 This is the source for **curious96.com** — the personal academic portfolio of
-**Saumitra Phatak**, a Physics Ph.D. candidate in Jonathan Hood's lab at Purdue
+**Saumitra Phatak**, who recently completed his Physics Ph.D. in Jonathan Hood's lab at Purdue
 University (AMO physics: optical tweezers, single lithium-6 and cesium-133 atoms,
 laser cooling, and LiCs molecule assembly).
 
@@ -196,7 +196,7 @@ list. To add a new essay to the teaser:
 
 ### Add/update poems (`poetry.html`)
 
-Same pattern as writing: the full 104-poem archive lives at
+Same pattern as writing: the full 108-poem archive lives at
 `https://saumitraphatak.github.io/siyahi-poetry/`. This page shows 5 selected poems.
 To feature a different/new poem, copy an existing `<div class="glass-card poem-card"
 data-lang="hindi|marathi|english">` block and fill in the Devanagari or English text,
