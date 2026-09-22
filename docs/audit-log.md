@@ -213,3 +213,172 @@ insertion.
 
 No git commits made (read-only git policy). One file edited this session:
 `publications.html` (JSON-LD addition described above).
+
+### 2026-09-20
+
+**Orientation:** `git status` at session start was clean, in sync with
+`origin/main` — no locally-modified files to avoid today (unlike some prior
+runs). Last commit still `5f80c8a`, nothing new since 2026-09-19. Re-verified
+the four original "Highest-value fixes" and the low-priority items are all
+still in place (sitemap includes `projects.html`; ARIA/skip-link/`id="main"`
+on all 9 content pages; `research.html` footer link has `target`/`rel`;
+`og:image`/Twitter Card on every page except `404.html`, which doesn't need
+one; poem `lang="hi"`/`lang="mr"` attributes; `width`/`height` on both
+`<img>` tags; Devanagari font scoped to `poetry.html` only) — no regressions.
+
+**Fresh pass this session — ran a broader mechanical-check script** (Python,
+read-only) across all 10 pages, checking: HTML tag balance, heading-level
+hierarchy (h1 count + skipped levels), duplicate `id` attributes, every
+external `<a>` for `target="_blank" rel="noopener"`, stale-phrase regression
+("Ph.D. candidate", "104 poems"), current-role mentions, meta description
+length, and OG/Twitter tag presence. Results: tag balance clean, zero
+duplicate ids, zero external links missing target/rel, zero stale phrases,
+CSS/JS cache-busting version strings (`?v=20260908`) consistent across all
+10 pages, `writing.html`'s topic-filter sentence still correctly says six
+threads (the "PhD life" mismatch fixed 2026-09-09 hasn't regressed).
+
+**New finding (flagged, not fixed) — heading hierarchy skip on two pages:**
+`contact.html` and the first `<section>` of `teaching.html` jump straight
+from `<h1>` to `<h3>` with no intervening `<h2>`, unlike every other page's
+h1→h2→h3 pattern (e.g. `index.html`'s own `info-card` grid has an h2
+"Tools, teaching, writing, and projects" heading before its h3 cards, and
+`projects.html` has h2 "Four projects, all open source" before its h3s).
+Specifically: all 8 `contact.html` contact-card headings (Email, Group,
+Google Scholar, GitHub, LinkedIn, CV PDF, AMO Toolkit, Poetry) are h3 with
+no group h2 anywhere on the page; `teaching.html`'s first section (Purdue
+laboratories / AMO mini-course / Mentorship) is the same, while its second
+section ("Recorded talks") already correctly has an h2 before its h3 video
+cards. This is a genuine WCAG 1.3.1/2.4.6 heading-structure gap. I did not
+fix it myself because there isn't a purely mechanical fix available: the
+site's base CSS gives `h2` a much larger font-size (`clamp(1.65rem, 3vw,
+2.65rem)`) than `h3` (`1.08rem`) with no existing per-card override, and
+`contact.html`'s cards also rely on a `.contact-card[href] h3::after` CSS
+rule for their "↗" arrow — so simply promoting the tags would blow up the
+card typography and drop the arrow icon (a CSS override could compensate,
+but that's a visual-design call, not a mechanical one). The alternative —
+adding a missing group `<h2>` above each card row, matching the rest of the
+site — needs new heading text I shouldn't invent on your behalf (e.g. what
+to call the contact-card group; "Ways to connect", "Get in touch", etc.).
+Flagging with the specifics above so you can pick an approach; happy to
+implement either exact version once you decide.
+
+**External link re-check:** re-tried the Purdue Hammer thesis link (still
+403) and, for the first time, both APS DOI links on `publications.html`
+(`10.1103/PhysRevLett.131.083001` and `10.1103/PhysRevA.110.043116` — both
+also 403'd today, where a prior 09-08 check had one APS DOI resolve fine).
+Reads as the same bot/anti-scraping blocking pattern seen on every prior
+check, now apparently applied more broadly by APS's site, not evidence of
+an actual break — but worth your own manual click on all three, especially
+the thesis link, given today's 403 count is the highest yet.
+
+**Not touched / flagged for you, not fixed (all carried over, still open):**
+- No mention anywhere on the site of your current role (Quantum Engineer at
+  Atom Computing, Boulder, CO) — still just "recently completed his Ph.D.",
+  no post-Ph.D. role/location. Still a content/voice decision.
+- `contact.html`'s only listed email is still `phataks@purdue.edu` — worth
+  confirming that's still your intended primary contact post-Ph.D.
+- Homepage meta description (182 chars, over the ~155–160 guideline) —
+  still flagging, not rewriting your copy.
+- Publications page `<h2>` title-casing (arXiv-style vs. journal-style,
+  detailed in the 09-18 entry) — still flagging, not picking a house style
+  for you.
+- New: heading-hierarchy skip on `contact.html`/`teaching.html`, detailed
+  above — flagging an approach choice, not implementing one myself.
+- Structured data beyond `index.html`'s `Person` block and
+  `publications.html`'s `Thesis`/`ScholarlyArticle` block (added 09-19) —
+  could extend further (e.g. `research.html`) but keeping today's scope to
+  the items above.
+- Purdue Hammer thesis link and both APS DOI links — still recommend your
+  own manual click, automated fetch still blocked (see above).
+
+No git commits made (read-only git policy). No HTML/CSS/JS files were
+edited this session — everything checked out clean or required a design/
+content judgment call I flagged instead of making unilaterally; this log
+file is the only thing written to.
+
+### 2026-09-22
+
+**Orientation:** No log entry for 2026-09-21 — this scheduled task apparently
+didn't fire that day (or didn't reach the logging step); `git log` confirms
+no commits landed in that window either (last commit still `5f80c8a`,
+2026-09-19). `git status` at session start showed only `docs/audit-log.md`
+locally modified — this log's own uncommitted 09-20 entry, carried over
+untouched per policy (this task never commits). No other file had pending
+local changes, so nothing was off-limits today. Re-verified the four
+original "Highest-value fixes" directly: `projects.html` is in
+`sitemap.xml`; `aria-label`/`aria-expanded`/skip-link/`id="main"` present on
+all 9 content pages; the `research.html` footer "AMO Toolkit" link carries
+`target="_blank" rel="noopener"`; every page has `og:image`/Twitter Card
+except `404.html` (expected). No regressions.
+
+**Fresh pass this session:**
+- Re-inventoried every external `href` across all 10 pages (grep) and
+  spot-checked ones not recently tested: `github.com/saumitraphatak` (loads,
+  6 repos, matches expected), `saumitraphatak.github.io/realworld-academy/`
+  (loads fine), `curious-writings/articles/12-boston-experience.html`
+  (loads fine). `arxiv.org/abs/2505.10540` (the Cs-imaging paper) also
+  resolves fine. Instagram/LinkedIn/Google Scholar profile links returned
+  `ROBOTS_DISALLOWED` to the fetch tool (their robots.txt blocks bots, not a
+  site break — same non-finding as fetching most social profile URLs).
+  `amotoolkit.com` again only returned header/JS-shell content to the fetch
+  tool — inconclusive, consistent with every prior check, not flagging as
+  broken. One YouTube link (`h3b_7vSZtys`) hit a 429 rate limit on the fetch
+  tool; did not retry per the avoid-rabbit-holes guidance. Did not re-poke
+  the Purdue Hammer thesis link or the two APS DOI links today — both have
+  403'd to automated fetch on every check since the audit began (increasing
+  scope over time, per the 09-20 entry), clearly bot-blocking rather than a
+  real break, and re-testing daily adds no new information; still worth
+  Saumitra's own manual click if he hasn't already.
+- Verified `<meta charset>` precedes `<meta name="viewport">` precedes the
+  gtag snippet on all 10 pages (per CLAUDE.md's stated head-boilerplate
+  order) — consistent everywhere, no regressions.
+- New check — WCAG contrast ratios: computed relative-luminance contrast
+  for every text/accent color in `css/styles.css`'s `:root` against the
+  page background (`--bg: #081016`): body text `#eef7f5` → 17.6:1, muted
+  text `#9fb2b0` → 8.6:1, accent `#7de2d1` → 12.5:1, accent-2 `#ffc857` →
+  12.5:1, accent-3 `#ff7a59` → 7.5:1. All comfortably clear WCAG AA (4.5:1)
+  and AAA (7:1) thresholds for normal text — no contrast issues.
+- Ran an automated regex pass (Python) across all 10 pages for: stale
+  role/status phrases (`Ph.D. candidate`, `104 poems`, `currently
+  pursuing`, `graduate student`), duplicated consecutive words, and
+  meta-description length outliers. One `graduate student` hit in
+  `cv.html` — checked in context: it's "Purdue Graduate Student
+  Government" (an award-grantor's proper name), not a stale claim about
+  Saumitra's own status — false positive, no action. No duplicated words
+  found. Meta description lengths: `404.html` 58 chars and `contact.html`
+  51 chars (both fine — short but not broken), `index.html` still 182
+  chars (the one over-length outlier, unchanged, still just flagging).
+- Attempted to install `codespell` for a proper dictionary-based typo scan
+  (both via `device_bash` and, after staging the HTML files, via the cloud
+  container's `pip`) — both blocked by network/proxy restrictions with no
+  package available. Noting this so a future run doesn't re-attempt the
+  same install; manual regex/pattern typo scans (done in several prior
+  sessions, including today's duplicate-word check) remain the fallback.
+
+**Not touched / flagged for you, not fixed (all carried over, still open):**
+- No mention anywhere on the site of your current role (Quantum Engineer at
+  Atom Computing, Boulder, CO) — still just "recently completed his Ph.D.",
+  no post-Ph.D. role/location. Still a content/voice decision.
+- `contact.html`'s only listed email is still `phataks@purdue.edu` — worth
+  confirming that's still your intended primary contact post-Ph.D.
+- Homepage meta description (182 chars, over the ~155–160 guideline) —
+  still flagging, not rewriting your copy.
+- Publications page `<h2>` title-casing (arXiv-style vs. journal-style,
+  detailed in the 09-18 entry) — still flagging, not picking a house style
+  for you.
+- Heading-hierarchy skip on `contact.html`/`teaching.html` (no `<h2>`
+  before the card `<h3>`s), detailed in the 09-20 entry — still flagging an
+  approach choice (CSS override vs. new group heading text), not
+  implementing one myself.
+- Structured data beyond `index.html`'s `Person` block and
+  `publications.html`'s `Thesis`/`ScholarlyArticle` block — could extend
+  further (e.g. `research.html`) but keeping today's scope to the items
+  above.
+- Purdue Hammer thesis link and both APS DOI links — consistently
+  bot-blocked to automated fetch; recommend your own manual click,
+  especially the thesis link.
+
+No git commits made (read-only git policy). No HTML/CSS/JS files were
+edited this session — everything checked out clean or required a design/
+content judgment call already on the flagged list; this log file is the
+only thing written to.
