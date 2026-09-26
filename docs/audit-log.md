@@ -382,3 +382,154 @@ No git commits made (read-only git policy). No HTML/CSS/JS files were
 edited this session — everything checked out clean or required a design/
 content judgment call already on the flagged list; this log file is the
 only thing written to.
+
+### 2026-09-23
+
+**Orientation:** `git status` at session start was clean, in sync with
+`origin/main` — no locally-modified files to avoid today. Last commit
+`a3d03f8` (2026-09-22, Saumitra's own commit landing the 09-22 automated
+entry into this log) — nothing new since. Re-verified the four original
+"Highest-value fixes" directly, no regressions: `projects.html` is in
+`sitemap.xml`; `aria-label="Toggle navigation"` and `id="main"` present on
+all 10 pages (including `404.html`); the `research.html` footer "AMO
+Toolkit" link still carries `target="_blank" rel="noopener"`; every page
+has `og:image`/Twitter Card except `404.html` (expected/fine, no page
+needing a social preview).
+
+**Fresh pass this session:**
+- Full HTML tag-balance check (Python `html.parser`) across all 10 pages —
+  clean.
+- New checks not run in prior sessions: verified `sitemap.xml` lists
+  exactly the 9 indexable pages with no stale/missing entries; verified
+  `robots.txt` points at the correct sitemap URL; verified every page's
+  `rel="canonical"` matches its own filename under
+  `https://www.curious96.com/`; verified every page has a favicon link;
+  verified `<meta charset>` → `<meta viewport>` → gtag snippet ordering
+  holds on all 10 pages (matches CLAUDE.md's documented head-boilerplate
+  order).
+- Full internal link/anchor/asset-reference check (every `href`/`src`
+  across all 10 pages, query strings stripped before the filesystem check
+  this time to avoid a false-positive bug in a same-day draft of the
+  script) — zero broken internal links, zero dangling in-page anchors,
+  zero broken CSS/JS/image asset paths.
+- Re-ran the external-link `target="_blank" rel="noopener"` audit across
+  all 10 pages — zero external links missing either attribute.
+- Re-ran the stale-phrase regex sweep (`Ph.D. candidate`, `104 poems`,
+  `currently pursuing`, `graduate student`) — only hit is the known false
+  positive in `cv.html` ("Purdue Graduate Student Government", an award
+  name, not a claim about Saumitra's own status). No genuine stale phrases.
+- Duplicate-consecutive-word sweep on stripped text — only hit was
+  adjacent nav-link/page-heading text ("Contact" nav link immediately
+  followed by the "Contact" `<h1>` on `contact.html`), not a real repeated
+  word in prose. No genuine typos found.
+- Inventoried all unique external domains linked from the site (14 total)
+  as a map for future spot-checks; did not re-fetch the already
+  well-documented bot-blocked ones (Purdue Hammer thesis link, both APS
+  DOI links — 403 on every check since the audit began) or burn fetches on
+  robots-disallowed social profile URLs (Instagram/LinkedIn/Google
+  Scholar), consistent with prior sessions' avoid-rabbit-holes calls.
+
+**No edits made this session** — everything checked out clean; nothing
+safe and mechanical was found to fix. All open items are unchanged
+judgment calls already on the list below, not new findings.
+
+**Not touched / flagged for you, not fixed (all carried over, still open):**
+- No mention anywhere on the site of your current role (Quantum Engineer at
+  Atom Computing, Boulder, CO) — still just "recently completed his Ph.D.",
+  no post-Ph.D. role/location. Still a content/voice decision.
+- `contact.html`'s only listed email is still `phataks@purdue.edu` — worth
+  confirming that's still your intended primary contact post-Ph.D.
+- Homepage meta description (182 chars, over the ~155–160 guideline) —
+  still flagging, not rewriting your copy.
+- Publications page `<h2>` title-casing (arXiv-style vs. journal-style,
+  detailed in the 09-18 entry) — still flagging, not picking a house style
+  for you.
+- Heading-hierarchy skip on `contact.html`/`teaching.html` (no `<h2>`
+  before the card `<h3>`s), detailed in the 09-20 entry — still flagging an
+  approach choice, not implementing one myself.
+- Structured data beyond `index.html`'s `Person` block and
+  `publications.html`'s `Thesis`/`ScholarlyArticle` block — could extend
+  further (e.g. `research.html`) but not done today either.
+- Purdue Hammer thesis link and both APS DOI links — consistently
+  bot-blocked to automated fetch; recommend your own manual click,
+  especially the thesis link, given it's now been 403ing for weeks.
+
+No git commits made (read-only git policy). Only this log entry was
+written today.
+
+### 2026-09-24
+
+**Orientation:** `git status` at session start showed only `docs/audit-log.md`
+locally modified — this log's own uncommitted 09-23 entry, carried over
+untouched per policy (this task never commits; last real commit still
+`a3d03f8`, 2026-09-22). No other file had pending local changes, so nothing
+was off-limits today. Re-verified the four original "Highest-value fixes"
+directly: `projects.html` is in `sitemap.xml`; `aria-label`/`aria-expanded`/
+skip-link/`id="main"` present on all 9 content pages; the `research.html`
+footer "AMO Toolkit" link carries `target="_blank" rel="noopener"`; every
+page has `og:image`/Twitter Card except `404.html` (expected, no page
+needing a social preview). No regressions.
+
+**Fresh pass this session:**
+- Accessibility/SEO hygiene sweep (Python, read-only) across all 10 pages:
+  `<html lang>` present everywhere; both `<img>` tags (contact.html,
+  index.html) have descriptive `alt` text and explicit `width`/`height`;
+  zero duplicate `id` attributes on any page; `<meta name="viewport">`
+  present on every page; no `apple-touch-icon`/`manifest.json` anywhere
+  (not in the original audit's scope, not flagging as a gap — a from-scratch
+  static site without a PWA manifest is a normal, deliberate choice, not a
+  defect).
+- Full internal `href`/`src` resolution check across all 10 pages (paths
+  resolved against the filesystem, query strings and anchors stripped) —
+  zero broken internal links, zero broken CSS/JS/image asset paths.
+- Full HTML tag-balance check (Python `html.parser`) across all 10 pages —
+  clean, no unclosed/mismatched tags.
+- Regression sweep: stale-phrase regex (`Ph.D. candidate`, `104 poems`,
+  `currently pursuing`, `graduate student`, plus a fresh check for
+  `Atom Computing`/`Boulder` mentions specifically) — only hit is the known
+  `cv.html` false positive ("Purdue Graduate Student Government," an award
+  name). No `Atom Computing`/`Boulder` mentions found anywhere (confirms the
+  current-role gap below is still unaddressed, not a new finding). Meta
+  description lengths unchanged from every prior check (`index.html` still
+  the lone 182-char outlier; all others 51–131 chars). Cache-busting
+  `?v=20260908` query strings still consistent across all 10 pages.
+  External-link `target="_blank" rel="noopener"` re-check — zero external
+  links missing either attribute.
+- External link spot-check (rotating to less-recently-tested targets):
+  `research.html` itself resolves live at `www.curious96.com/research.html`
+  with intact nav/metadata (sanity check on the GitHub Pages deployment
+  itself, not recently done directly); essay `05-fall-2022.html` on the
+  Curious Writings site loads fine. LinkedIn profile link returned
+  `ROBOTS_DISALLOWED` as expected (not a break — same as every previous
+  LinkedIn/Instagram/Scholar check). Did not re-poke the Purdue Hammer
+  thesis link or the two APS DOI links today — consistently bot-blocked to
+  automated fetch on every check since the audit began; re-testing daily
+  adds no new information, still recommend your own manual click.
+
+**No edits made this session** — everything checked out clean; nothing
+safe and mechanical was found to fix. All open items below are unchanged
+judgment calls already on the list, not new findings.
+
+**Not touched / flagged for you, not fixed (all carried over, still open):**
+- No mention anywhere on the site of your current role (Quantum Engineer at
+  Atom Computing, Boulder, CO) — still just "recently completed his Ph.D.",
+  no post-Ph.D. role/location. Still a content/voice decision.
+- `contact.html`'s only listed email is still `phataks@purdue.edu` — worth
+  confirming that's still your intended primary contact post-Ph.D.
+- Homepage meta description (182 chars, over the ~155–160 guideline) —
+  still flagging, not rewriting your copy.
+- Publications page `<h2>` title-casing (arXiv-style vs. journal-style,
+  detailed in the 09-18 entry) — still flagging, not picking a house style
+  for you.
+- Heading-hierarchy skip on `contact.html`/`teaching.html` (no `<h2>`
+  before the card `<h3>`s), detailed in the 09-20 entry — still flagging an
+  approach choice, not implementing one myself.
+- Structured data beyond `index.html`'s `Person` block and
+  `publications.html`'s `Thesis`/`ScholarlyArticle` block — could extend
+  further (e.g. `research.html`) but not done today either.
+- Purdue Hammer thesis link and both APS DOI links — consistently
+  bot-blocked to automated fetch; recommend your own manual click,
+  especially the thesis link, given it's now been 403ing for weeks.
+
+No git commits made (read-only git policy). Only this log entry was
+written today.
